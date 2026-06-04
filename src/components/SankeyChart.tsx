@@ -1,10 +1,11 @@
 import { ResponsiveSankey } from '@nivo/sankey';
-import type { PeriodData } from '../data/financials';
-import { buildSankeyData } from '../data/financials';
+import type { PeriodData, PeriodType } from '../data/financials';
+import { buildSankeyData, getPeriods } from '../data/financials';
 import { useNavigate } from 'react-router-dom';
 
 interface Props {
   period: PeriodData;
+  periodType: PeriodType;
 }
 
 const fmt = (v: number) => {
@@ -43,11 +44,11 @@ const makeLabelsLayer = (
                 </text>
               )}
               <text x={x} y={hasRoom ? cy + 3 : cy} textAnchor={anchor}
-                fill="#ffffff" fontSize={12} fontWeight="700" fontFamily="Inter, sans-serif">
+                fill="#111111" fontSize={12} fontWeight="700" fontFamily="Inter, sans-serif">
                 {fmt(actual)}
               </text>
               <text x={x} y={hasRoom ? cy + 17 : cy + 13} textAnchor={anchor}
-                fill="rgba(255,255,255,0.38)" fontSize={10} fontFamily="Inter, sans-serif">
+                fill="rgba(0,0,0,0.45)" fontSize={10} fontFamily="Inter, sans-serif">
                 {pct}
               </text>
             </g>
@@ -57,8 +58,16 @@ const makeLabelsLayer = (
     );
   };
 
-export default function SankeyChart({ period }: Props) {
+export default function SankeyChart({ period, periodType }: Props) {
   const navigate = useNavigate();
+  // Scale layout height so the Revenue bar visibly reflects absolute magnitude.
+  // Revenue fills the full layout height, so a taller chart = a taller bar.
+  const maxRevenue = Math.max(...getPeriods(periodType).map(p => p.revenue));
+  const LAYOUT_MIN = 220;
+  const LAYOUT_MAX = 480;
+  const layoutH = LAYOUT_MIN + (LAYOUT_MAX - LAYOUT_MIN) * (period.revenue / maxRevenue);
+  const containerH = Math.round(layoutH) + 20 + 200; // + top margin + bottom margin
+
   const { nodes, links } = buildSankeyData(period);
 
   const nivoNodes = nodes.map(n => ({ id: n.id, nodeColor: n.color }));
@@ -165,11 +174,11 @@ export default function SankeyChart({ period }: Props) {
           </text>
         )}
         <text x={opNodeX - PAD} y={opRoom ? opCY + 3 : opCY} textAnchor="end"
-          fill="#ffffff" fontSize={12} fontWeight="700" fontFamily="Inter, sans-serif">
+          fill="#111111" fontSize={12} fontWeight="700" fontFamily="Inter, sans-serif">
           {fmt(operatingIncome)}
         </text>
         <text x={opNodeX - PAD} y={opRoom ? opCY + 17 : opCY + 13} textAnchor="end"
-          fill="rgba(255,255,255,0.38)" fontSize={10} fontFamily="Inter, sans-serif">
+          fill="rgba(0,0,0,0.45)" fontSize={10} fontFamily="Inter, sans-serif">
           {revenue > 0 ? `${((operatingIncome / revenue) * 100).toFixed(1)}% of rev` : ''}
         </text>
 
@@ -186,11 +195,11 @@ export default function SankeyChart({ period }: Props) {
           </text>
         )}
         <text x={netNodeX - PAD} y={netRoom ? netCY + 3 : netCY} textAnchor="end"
-          fill="#ffffff" fontSize={12} fontWeight="700" fontFamily="Inter, sans-serif">
+          fill="#111111" fontSize={12} fontWeight="700" fontFamily="Inter, sans-serif">
           {fmt(netIncome)}
         </text>
         <text x={netNodeX - PAD} y={netRoom ? netCY + 17 : netCY + 13} textAnchor="end"
-          fill="rgba(255,255,255,0.38)" fontSize={10} fontFamily="Inter, sans-serif">
+          fill="rgba(0,0,0,0.45)" fontSize={10} fontFamily="Inter, sans-serif">
           {revenue > 0 ? `${((netIncome / revenue) * 100).toFixed(1)}% of rev` : ''}
         </text>
 
@@ -206,11 +215,11 @@ export default function SankeyChart({ period }: Props) {
               </text>
             )}
             <text x={othrNodeX + NODE_W + PAD} y={othrRoom ? othrCY + 3 : othrCY} textAnchor="start"
-              fill="#ffffff" fontSize={12} fontWeight="700" fontFamily="Inter, sans-serif">
+              fill="#111111" fontSize={12} fontWeight="700" fontFamily="Inter, sans-serif">
               {otherIncome > 0 ? '+' : ''}{fmt(otherIncome)}
             </text>
             <text x={othrNodeX + NODE_W + PAD} y={othrRoom ? othrCY + 17 : othrCY + 13} textAnchor="start"
-              fill="rgba(255,255,255,0.38)" fontSize={10} fontFamily="Inter, sans-serif">
+              fill="rgba(0,0,0,0.45)" fontSize={10} fontFamily="Inter, sans-serif">
               {revenue > 0 ? `${((otherIncome / revenue) * 100).toFixed(1)}% of rev` : ''}
             </text>
           </>
@@ -220,7 +229,7 @@ export default function SankeyChart({ period }: Props) {
   };
 
   return (
-    <div style={{ height: 620, width: '100%' }}>
+    <div style={{ height: containerH, width: '100%' }}>
       <ResponsiveSankey
         data={{ nodes: nivoNodes, links: nivoLinks }}
         margin={{ top: 20, right: 150, bottom: 200, left: 150 }}
@@ -247,28 +256,28 @@ export default function SankeyChart({ period }: Props) {
           const meta = nodeById[String(node.id)];
           return (
             <div style={{
-              background: '#18181b',
-              border: `1px solid ${node.color}30`,
+              background: '#ffffff',
+              border: `1px solid ${node.color}40`,
               borderLeft: `3px solid ${node.color}`,
               borderRadius: 8,
               padding: '10px 14px',
-              color: '#ffffff',
+              color: '#111111',
               fontSize: 13,
               minWidth: 200,
-              boxShadow: '0 8px 24px rgba(0,0,0,0.4)',
+              boxShadow: '0 4px 16px rgba(0,0,0,0.12)',
             }}>
               <div style={{ fontWeight: 700, color: node.color, marginBottom: 8, fontSize: 14 }}>
                 {meta?.label ?? node.id}
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', gap: 24, marginBottom: 4 }}>
-                <span style={{ color: 'rgba(255,255,255,0.4)' }}>Value</span>
+                <span style={{ color: 'rgba(0,0,0,0.45)' }}>Value</span>
                 <span style={{ fontWeight: 600 }}>{fmt(meta?.actualValue ?? node.value)}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', gap: 24 }}>
-                <span style={{ color: 'rgba(255,255,255,0.4)' }}>% of Revenue</span>
+                <span style={{ color: 'rgba(0,0,0,0.45)' }}>% of Revenue</span>
                 <span>{fmtPct(meta?.actualValue ?? node.value, period.revenue)}</span>
               </div>
-              <div style={{ marginTop: 10, fontSize: 11, color: '#ff6423', borderTop: '1px solid rgba(255,255,255,0.07)', paddingTop: 8 }}>
+              <div style={{ marginTop: 10, fontSize: 11, color: '#ff6423', borderTop: '1px solid rgba(0,0,0,0.07)', paddingTop: 8 }}>
                 Click to drill down →
               </div>
             </div>

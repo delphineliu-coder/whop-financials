@@ -7,8 +7,8 @@
 }
 
 body {
-  background: #0b0c0e;
-  color: #ffffff;
+  background: #f1f1f1;
+  color: #111111;
   min-height: 100vh;
 }
 
@@ -28,8 +28,8 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 16px 32px;
-  border-bottom: 1px solid rgba(255,255,255,0.07);
-  background: #111113;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  background: #ffffff;
   flex-wrap: wrap;
   gap: 12px;
 }
@@ -49,7 +49,7 @@ body {
 
 .subtitle {
   font-size: 12px;
-  color: rgba(255,255,255,0.35);
+  color: rgba(0,0,0,0.4);
 }
 
 .main {
@@ -69,8 +69,8 @@ body {
 
 .type-tabs {
   display: flex;
-  background: #1a1a1c;
-  border: 1px solid rgba(255,255,255,0.08);
+  background: #e8e8e8;
+  border: 1px solid rgba(0,0,0,0.08);
   border-radius: 8px;
   padding: 2px;
   gap: 2px;
@@ -81,23 +81,23 @@ body {
   border: none;
   border-radius: 6px;
   background: transparent;
-  color: rgba(255,255,255,0.4);
+  color: rgba(0,0,0,0.45);
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.15s;
 }
-.tab-btn:hover { color: #ffffff; }
+.tab-btn:hover { color: #111111; }
 .tab-btn.active {
-  background: rgba(255,100,35,0.15);
+  background: rgba(255,100,35,0.12);
   color: #ff6423;
 }
 
 .period-select {
-  background: #1a1a1c;
-  border: 1px solid rgba(255,255,255,0.08);
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.12);
   border-radius: 8px;
-  color: #ffffff;
+  color: #111111;
   padding: 6px 12px;
   font-size: 13px;
   cursor: pointer;
@@ -113,8 +113,8 @@ body {
 }
 
 .metric-card {
-  background: #141416;
-  border: 1px solid rgba(255,255,255,0.07);
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.07);
   border-radius: 10px;
   padding: 16px 20px;
 }
@@ -123,7 +123,7 @@ body {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.8px;
-  color: rgba(255,255,255,0.35);
+  color: rgba(0,0,0,0.4);
   margin-bottom: 6px;
 }
 
@@ -132,19 +132,19 @@ body {
   font-weight: 700;
   letter-spacing: -0.5px;
 }
-.metric-value.positive { color: #ffffff; }
+.metric-value.positive { color: #111111; }
 .metric-value.negative { color: #f43f5e; }
 
 .metric-sub {
   font-size: 12px;
-  color: rgba(255,255,255,0.35);
+  color: rgba(0,0,0,0.4);
   margin-top: 4px;
 }
 
 /* ── Chart ── */
 .chart-container {
-  background: #141416;
-  border: 1px solid rgba(255,255,255,0.07);
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.07);
   border-radius: 12px;
   padding: 20px 16px 8px;
   flex: 1;
@@ -152,7 +152,7 @@ body {
 
 .chart-hint {
   font-size: 12px;
-  color: rgba(255,255,255,0.3);
+  color: rgba(0,0,0,0.35);
   text-align: center;
   margin-bottom: 4px;
 }
@@ -166,7 +166,7 @@ body {
 
 .back-btn {
   background: transparent;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(0,0,0,0.12);
   border-radius: 8px;
   color: #ff6423;
   padding: 8px 16px;
@@ -187,21 +187,20 @@ body {
 .detail-header h1 {
   font-size: 28px;
   font-weight: 700;
-  color: #ffffff;
+  color: #111111;
 }
 
 .detail-period {
   font-size: 14px;
-  color: rgba(255,255,255,0.35);
+  color: rgba(0,0,0,0.4);
 }
 
 .detail-placeholder {
-  background: #141416;
-  border: 1px dashed rgba(255,255,255,0.1);
+  background: #ffffff;
+  border: 1px dashed rgba(0,0,0,0.15);
   border-radius: 12px;
   padding: 60px;
   text-align: center;
-  color: rgba(255,255,255,0.35);
 }
 
 .placeholder-icon {
@@ -209,5 +208,5 @@ body {
   margin-bottom: 16px;
 }
 
-.detail-placeholder p { margin-bottom: 8px; font-size: 15px; color: rgba(255,255,255,0.5); }
-.placeholder-sub { font-size: 13px !important; color: rgba(255,255,255,0.3) !important; }
+.detail-placeholder p { margin-bottom: 8px; font-size: 15px; color: rgba(0,0,0,0.5); }
+.placeholder-sub { font-size: 13px !important; color: rgba(0,0,0,0.35) !important; }

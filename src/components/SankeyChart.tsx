@@ -33,21 +33,17 @@ const makeLabelsLayer = (
           const color = meta?.color ?? '#cbd5e1';
           const actual = meta?.actualValue ?? node.value;
           const pct = revenue > 0 ? `${((actual / revenue) * 100).toFixed(1)}%` : '';
-          const hasRoom = node.height >= 18;
-
           return (
             <g key={node.id}>
-              {hasRoom && (
-                <text x={x} y={cy - 13} textAnchor={anchor}
-                  fill={color} fontSize={11} fontFamily="Inter, sans-serif" opacity={0.85}>
-                  {meta?.label ?? node.id}
-                </text>
-              )}
-              <text x={x} y={hasRoom ? cy + 3 : cy} textAnchor={anchor}
+              <text x={x} y={cy - 13} textAnchor={anchor}
+                fill={color} fontSize={11} fontFamily="Inter, sans-serif" opacity={0.85}>
+                {meta?.label ?? node.id}
+              </text>
+              <text x={x} y={cy + 3} textAnchor={anchor}
                 fill="#111111" fontSize={12} fontWeight="700" fontFamily="Inter, sans-serif">
                 {fmt(actual)}
               </text>
-              <text x={x} y={hasRoom ? cy + 17 : cy + 13} textAnchor={anchor}
+              <text x={x} y={cy + 17} textAnchor={anchor}
                 fill="rgba(0,0,0,0.6)" fontSize={10} fontFamily="Inter, sans-serif">
                 {pct}
               </text>

@@ -134,7 +134,7 @@ export default function SankeyChart({ period, periodType }: Props) {
         </text>
         <text x={opNodeX - PAD} y={opRoom ? opCY + 17 : opCY + 13} textAnchor="end"
           fill="rgba(0,0,0,0.6)" fontSize={10} fontFamily="Inter, sans-serif">
-          {revenue > 0 ? `${((operatingIncome / revenue) * 100).toFixed(1)}% of rev` : ''}
+          {revenue > 0 ? `${((operatingIncome / revenue) * 100).toFixed(1)}%` : ''}
         </text>
       </g>
     );

@@ -50,10 +50,10 @@ export default function Dashboard() {
       </header>
 
       <main className="main">
-        <MetricCards period={period} />
+        <MetricCards period={period} periodType={periodType} />
         <div className="chart-container">
           <div className="chart-hint">Click any node to drill into line-item detail</div>
-          <SankeyChart period={period} />
+          <SankeyChart period={period} periodType={periodType} />
         </div>
       </main>
     </div>

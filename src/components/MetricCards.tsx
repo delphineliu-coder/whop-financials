@@ -28,6 +28,7 @@ export default function MetricCards({ period, periodType }: Props) {
     { label: 'Revenue', value: fmt(period.revenue), sub: `Run rate: ${fmtM(revRR)} · Take rate: ${pct(period.revenue, period.gtv)}`, positive: true },
     { label: 'Gross Profit', value: fmt(period.grossProfit), sub: `Margin: ${pct(period.grossProfit, period.revenue)}`, positive: gpMargin > 0 },
     { label: 'EBITDA', value: fmt(period.ebitda), sub: `Margin: ${pct(period.ebitda, period.revenue)}`, positive: period.ebitda >= 0 },
+    { label: 'Cash Balance', value: fmt(period.cashBalance), sub: null, positive: true },
   ];
 
   return (

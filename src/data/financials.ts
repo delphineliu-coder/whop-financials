@@ -92,7 +92,7 @@ export interface SankeyData {
   links: SankeyLink[];
 }
 
-const GREEN  = '#00FF00';
+const GREEN  = '#00A800';
 const RED    = '#FF0000';
 const ORANGE = '#ff6423';  // Whop brand orange
 

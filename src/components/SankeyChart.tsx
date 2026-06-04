@@ -85,35 +85,25 @@ export default function SankeyChart({ period, periodType }: Props) {
     const gp  = (sankeyNodes as any[]).find((n: any) => n.id === 'grossProfit');
     const rev = (sankeyNodes as any[]).find((n: any) => n.id === 'revenue');
     if (!gp) return null;
-    // Keep backward nodes to the right of the Revenue node's right edge
     const revFloor = rev ? rev.x + rev.width + 20 : 4;
 
     const NODE_W = 24;
     const PAD   = 12;
-    const { operatingIncome, otherIncome, netIncome, grossProfit, revenue } = period;
-    const GREEN = '#00A800';
-    const RED   = '#FF0000';
+    const { operatingIncome, grossProfit, revenue } = period;
+    const RED = '#FF0000';
 
-    // Flow heights proportional to GP node height
-    const scale     = gp.height / grossProfit;
-    const opFlowH   = Math.max(8,  Math.abs(operatingIncome) * scale);
-    const netFlowH  = Math.max(8,  Math.abs(netIncome)       * scale);
-    const othrFlowH = Math.max(4,  Math.abs(otherIncome)     * scale);
-    const showOther = Math.abs(otherIncome) > 0.01;
+    const scale   = gp.height / grossProfit;
+    const opFlowH = Math.max(8, Math.abs(operatingIncome) * scale);
+    const opNodeH = Math.max(NODE_W, opFlowH);
 
-    const opNodeH  = Math.max(NODE_W, opFlowH);
-    const netNodeH = Math.max(NODE_W, netFlowH);
-    const othrNodeH = Math.max(NODE_W, othrFlowH);
+    const gpExtY  = gp.y + gp.height;
+    const gpExtH  = opFlowH;
 
-    // ── GP extension (green) — elongates GP bar, Op Income exits from its bottom-left ──
-    const gpExtY = gp.y + gp.height;
-    const gpExtH = opFlowH;
-
-    // Op Income node: left of GP, flushed to top of GP extension
     const opNodeX = Math.max(gp.x - 80 - NODE_W, revFloor);
     const opNodeY = gpExtY;
+    const opCY    = opNodeY + opNodeH / 2;
+    const opRoom  = opNodeH >= 18;
 
-    // bezier: GP extension left edge → Op Income right edge
     const dx1 = (gp.x - (opNodeX + NODE_W)) * 0.5;
     const opLinkPath = [
       `M ${gp.x},${gpExtY}`,
@@ -123,52 +113,10 @@ export default function SankeyChart({ period, periodType }: Props) {
       'Z',
     ].join(' ');
 
-    // ── Op Income extension (red) — elongates Op Income, branches exit from here ──
-    const opExtY = opNodeY + opNodeH;
-    const opExtH = Math.max(netFlowH, showOther ? othrFlowH + 4 : 0);
-
-    // Net Income: exits left from Op Income extension (negative = further left)
-    const netColor  = netIncome >= 0 ? GREEN : RED;
-    const netNodeX  = Math.max(opNodeX - 64 - NODE_W, revFloor);
-    const netNodeY  = opExtY;
-    const dx2 = (opNodeX - (netNodeX + NODE_W)) * 0.5;
-    const netLinkPath = [
-      `M ${opNodeX},${opExtY}`,
-      `C ${opNodeX - dx2},${opExtY} ${netNodeX + NODE_W + dx2},${netNodeY + (netNodeH - netFlowH) / 2} ${netNodeX + NODE_W},${netNodeY + (netNodeH - netFlowH) / 2}`,
-      `L ${netNodeX + NODE_W},${netNodeY + (netNodeH + netFlowH) / 2}`,
-      `C ${netNodeX + NODE_W + dx2},${netNodeY + (netNodeH + netFlowH) / 2} ${opNodeX - dx2},${opExtY + netFlowH} ${opNodeX},${opExtY + netFlowH}`,
-      'Z',
-    ].join(' ');
-
-    // Other Income: exits right from Op Income extension (positive → right, negative → left)
-    const othrNodeX = opNodeX + NODE_W + 40;
-    const othrNodeY = opExtY;
-    const othrColor = otherIncome >= 0 ? GREEN : RED;
-    const dx3 = (othrNodeX - (opNodeX + NODE_W)) * 0.5;
-    const othrLinkPath = showOther ? [
-      `M ${opNodeX + NODE_W},${opExtY}`,
-      `C ${opNodeX + NODE_W + dx3},${opExtY} ${othrNodeX - dx3},${othrNodeY + (othrNodeH - othrFlowH) / 2} ${othrNodeX},${othrNodeY + (othrNodeH - othrFlowH) / 2}`,
-      `L ${othrNodeX},${othrNodeY + (othrNodeH + othrFlowH) / 2}`,
-      `C ${othrNodeX - dx3},${othrNodeY + (othrNodeH + othrFlowH) / 2} ${opNodeX + NODE_W + dx3},${opExtY + othrFlowH} ${opNodeX + NODE_W},${opExtY + othrFlowH}`,
-      'Z',
-    ].join(' ') : '';
-
-    const opCY   = opNodeY + opNodeH / 2;
-    const netCY  = netNodeY + netNodeH / 2;
-    const othrCY = othrNodeY + othrNodeH / 2;
-    const opRoom   = opNodeH   >= 18;
-    const netRoom  = netNodeH  >= 18;
-    const othrRoom = othrNodeH >= 18;
-
     return (
       <g>
-        {/* GP extension — red for loss months, elongates GP bar downward */}
         <rect x={gp.x} y={gpExtY} width={NODE_W} height={gpExtH} fill={RED} />
-
-        {/* GP extension → Op Income */}
         <path d={opLinkPath} fill={`${RED}55`} />
-
-        {/* Op Income node */}
         <rect x={opNodeX} y={opNodeY} width={NODE_W} height={opNodeH} fill={RED} rx={3} />
         {opRoom && (
           <text x={opNodeX - PAD} y={opCY - 13} textAnchor="end"
@@ -184,49 +132,6 @@ export default function SankeyChart({ period, periodType }: Props) {
           fill="rgba(0,0,0,0.6)" fontSize={10} fontFamily="Inter, sans-serif">
           {revenue > 0 ? `${((operatingIncome / revenue) * 100).toFixed(1)}% of rev` : ''}
         </text>
-
-        {/* Op Income extension — same red, elongates Op Income bar */}
-        <rect x={opNodeX} y={opExtY} width={NODE_W} height={opExtH} fill={RED} />
-
-        {/* Op Income extension → Net Income (leftward) */}
-        <path d={netLinkPath} fill={`${netColor}55`} />
-        <rect x={netNodeX} y={netNodeY} width={NODE_W} height={netNodeH} fill={netColor} rx={3} />
-        {netRoom && (
-          <text x={netNodeX - PAD} y={netCY - 13} textAnchor="end"
-            fill={netColor} fontSize={11} fontFamily="Inter, sans-serif" opacity={0.85}>
-            Net Income
-          </text>
-        )}
-        <text x={netNodeX - PAD} y={netRoom ? netCY + 3 : netCY} textAnchor="end"
-          fill="#111111" fontSize={12} fontWeight="700" fontFamily="Inter, sans-serif">
-          {fmt(netIncome)}
-        </text>
-        <text x={netNodeX - PAD} y={netRoom ? netCY + 17 : netCY + 13} textAnchor="end"
-          fill="rgba(0,0,0,0.6)" fontSize={10} fontFamily="Inter, sans-serif">
-          {revenue > 0 ? `${((netIncome / revenue) * 100).toFixed(1)}% of rev` : ''}
-        </text>
-
-        {/* Op Income extension → Other Income (rightward, only when non-zero) */}
-        {showOther && (
-          <>
-            <path d={othrLinkPath} fill={`${othrColor}55`} />
-            <rect x={othrNodeX} y={othrNodeY} width={NODE_W} height={othrNodeH} fill={othrColor} rx={3} />
-            {othrRoom && (
-              <text x={othrNodeX + NODE_W + PAD} y={othrCY - 13} textAnchor="start"
-                fill={othrColor} fontSize={11} fontFamily="Inter, sans-serif" opacity={0.85}>
-                Other Income
-              </text>
-            )}
-            <text x={othrNodeX + NODE_W + PAD} y={othrRoom ? othrCY + 3 : othrCY} textAnchor="start"
-              fill="#111111" fontSize={12} fontWeight="700" fontFamily="Inter, sans-serif">
-              {otherIncome > 0 ? '+' : ''}{fmt(otherIncome)}
-            </text>
-            <text x={othrNodeX + NODE_W + PAD} y={othrRoom ? othrCY + 17 : othrCY + 13} textAnchor="start"
-              fill="rgba(0,0,0,0.6)" fontSize={10} fontFamily="Inter, sans-serif">
-              {revenue > 0 ? `${((otherIncome / revenue) * 100).toFixed(1)}% of rev` : ''}
-            </text>
-          </>
-        )}
       </g>
     );
   };

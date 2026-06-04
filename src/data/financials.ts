@@ -121,7 +121,6 @@ const NODE_COLORS: Record<string, string> = {
   ga:              RED,
   badDebt:         RED,
   operatingIncome: GREEN,
-  netIncome:       GREEN,
   // Revenue sources
   payins:          '#FF6423',
   payouts:         '#F59E0B',
@@ -183,12 +182,6 @@ export const buildSankeyData = (period: PeriodData): SankeyData => {
   if (opFlow > 0.01) {
     nodes.push(n('operatingIncome', 'Operating Income', opFlow, period.operatingIncome, 'operatingIncome', 'profit'));
     links.push({ source: 'grossProfit', target: 'operatingIncome', value: opFlow });
-
-    if (period.netIncome > 0.01) {
-      const niFlow = Math.min(opFlow, period.netIncome);
-      nodes.push(n('netIncome', 'Net Income', niFlow, period.netIncome, 'netIncome', 'profit'));
-      links.push({ source: 'operatingIncome', target: 'netIncome', value: niFlow });
-    }
   }
 
   return { nodes, links };

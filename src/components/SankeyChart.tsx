@@ -82,8 +82,11 @@ export default function SankeyChart({ period, periodType }: Props) {
   const DownstreamLayer = ({ nodes: sankeyNodes }: any) => {
     if (period.operatingIncome >= 0) return null;
 
-    const gp = (sankeyNodes as any[]).find((n: any) => n.id === 'grossProfit');
+    const gp  = (sankeyNodes as any[]).find((n: any) => n.id === 'grossProfit');
+    const rev = (sankeyNodes as any[]).find((n: any) => n.id === 'revenue');
     if (!gp) return null;
+    // Keep backward nodes to the right of the Revenue node's right edge
+    const revFloor = rev ? rev.x + rev.width + 20 : 4;
 
     const NODE_W = 24;
     const PAD   = 12;
@@ -107,7 +110,7 @@ export default function SankeyChart({ period, periodType }: Props) {
     const gpExtH = opFlowH;
 
     // Op Income node: left of GP, flushed to top of GP extension
-    const opNodeX = Math.max(gp.x - 80 - NODE_W, 4);
+    const opNodeX = Math.max(gp.x - 80 - NODE_W, revFloor);
     const opNodeY = gpExtY;
 
     // bezier: GP extension left edge → Op Income right edge
@@ -126,7 +129,7 @@ export default function SankeyChart({ period, periodType }: Props) {
 
     // Net Income: exits left from Op Income extension (negative = further left)
     const netColor  = netIncome >= 0 ? GREEN : RED;
-    const netNodeX  = Math.max(opNodeX - 64 - NODE_W, 4);
+    const netNodeX  = Math.max(opNodeX - 64 - NODE_W, revFloor);
     const netNodeY  = opExtY;
     const dx2 = (opNodeX - (netNodeX + NODE_W)) * 0.5;
     const netLinkPath = [
@@ -232,7 +235,7 @@ export default function SankeyChart({ period, periodType }: Props) {
     <div style={{ height: containerH, width: '100%' }}>
       <ResponsiveSankey
         data={{ nodes: nivoNodes, links: nivoLinks }}
-        margin={{ top: 20, right: 150, bottom: 200, left: 150 }}
+        margin={{ top: 20, right: 150, bottom: 200, left: 180 }}
         align="start"
         colors={node => nodeById[node.id]?.color ?? '#ff6423'}
         nodeOpacity={1}

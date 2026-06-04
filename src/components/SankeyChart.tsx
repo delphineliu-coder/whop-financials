@@ -88,8 +88,8 @@ export default function SankeyChart({ period, periodType }: Props) {
     const NODE_W = 24;
     const PAD   = 12;
     const { operatingIncome, otherIncome, netIncome, grossProfit, revenue } = period;
-    const GREEN = '#4ade80';
-    const RED   = '#f43f5e';
+    const GREEN = '#00FF00';
+    const RED   = '#FF0000';
 
     // Flow heights proportional to GP node height
     const scale     = gp.height / grossProfit;

@@ -92,8 +92,8 @@ export interface SankeyData {
   links: SankeyLink[];
 }
 
-const GREEN  = '#4ade80';  // bright lime green
-const RED    = '#f43f5e';  // bright rose-red
+const GREEN  = '#00FF00';
+const RED    = '#FF0000';
 const ORANGE = '#ff6423';  // Whop brand orange
 
 const NODE_COLORS: Record<string, string> = {

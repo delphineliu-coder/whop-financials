@@ -6,7 +6,7 @@ import type { PeriodType } from '../data/financials';
 import { getPeriods, getPeriodStatus } from '../data/financials';
 
 const STATUS_CONFIG = {
-  actual:   { label: 'ACTUAL',   color: '#4ade80', bg: 'rgba(74,222,128,0.1)',  border: 'rgba(74,222,128,0.3)'  },
+  actual:   { label: 'ACTUAL',   color: '#00FF00', bg: 'rgba(0,255,0,0.1)',    border: 'rgba(0,255,0,0.3)'    },
   forecast: { label: 'FORECAST', color: '#ff6423', bg: 'rgba(255,100,35,0.1)', border: 'rgba(255,100,35,0.3)' },
   partial:  { label: 'PARTIAL',  color: '#fbbf24', bg: 'rgba(251,191,36,0.1)', border: 'rgba(251,191,36,0.3)' },
 };

@@ -133,7 +133,7 @@ body {
   letter-spacing: -0.5px;
 }
 .metric-value.positive { color: #111111; }
-.metric-value.negative { color: #f43f5e; }
+.metric-value.negative { color: #FF0000; }
 
 .metric-sub {
   font-size: 12px;

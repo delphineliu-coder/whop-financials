@@ -96,26 +96,28 @@ export default function SankeyChart({ period, periodType }: Props) {
     const opFlowH = Math.max(8, Math.abs(operatingIncome) * scale);
     const opNodeH = Math.max(NODE_W, opFlowH);
 
-    const gpExtY  = gp.y + gp.height;
-    const gpExtH  = opFlowH;
+    // Red extension sits immediately to the LEFT of the GP bar, bottom-aligned
+    const gpExtX = gp.x - NODE_W;
+    const gpExtY = gp.y + gp.height - opFlowH;
+    const gpExtH = opFlowH;
 
-    const opNodeX = Math.max(gp.x - 80 - NODE_W, revFloor);
+    const opNodeX = Math.max(gpExtX - 60 - NODE_W, revFloor);
     const opNodeY = gpExtY;
     const opCY    = opNodeY + opNodeH / 2;
     const opRoom  = opNodeH >= 18;
 
-    const dx1 = (gp.x - (opNodeX + NODE_W)) * 0.5;
+    const dx1 = (gpExtX - (opNodeX + NODE_W)) * 0.5;
     const opLinkPath = [
-      `M ${gp.x},${gpExtY}`,
-      `C ${gp.x - dx1},${gpExtY} ${opNodeX + NODE_W + dx1},${opNodeY + (opNodeH - opFlowH) / 2} ${opNodeX + NODE_W},${opNodeY + (opNodeH - opFlowH) / 2}`,
+      `M ${gpExtX},${gpExtY}`,
+      `C ${gpExtX - dx1},${gpExtY} ${opNodeX + NODE_W + dx1},${opNodeY + (opNodeH - opFlowH) / 2} ${opNodeX + NODE_W},${opNodeY + (opNodeH - opFlowH) / 2}`,
       `L ${opNodeX + NODE_W},${opNodeY + (opNodeH + opFlowH) / 2}`,
-      `C ${opNodeX + NODE_W + dx1},${opNodeY + (opNodeH + opFlowH) / 2} ${gp.x - dx1},${gpExtY + gpExtH} ${gp.x},${gpExtY + gpExtH}`,
+      `C ${opNodeX + NODE_W + dx1},${opNodeY + (opNodeH + opFlowH) / 2} ${gpExtX - dx1},${gpExtY + gpExtH} ${gpExtX},${gpExtY + gpExtH}`,
       'Z',
     ].join(' ');
 
     return (
       <g>
-        <rect x={gp.x} y={gpExtY} width={NODE_W} height={gpExtH} fill={RED} />
+        <rect x={gpExtX} y={gpExtY} width={NODE_W} height={gpExtH} fill={RED} rx={3} />
         <path d={opLinkPath} fill={`${RED}55`} />
         <rect x={opNodeX} y={opNodeY} width={NODE_W} height={opNodeH} fill={RED} rx={3} />
         {opRoom && (

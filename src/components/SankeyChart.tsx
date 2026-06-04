@@ -191,6 +191,7 @@ export default function SankeyChart({ period, periodType }: Props) {
             </div>
           );
         }}
+        linkTooltip={() => <></>}
         theme={{
           tooltip: { container: { background: 'transparent', boxShadow: 'none', padding: 0 } },
         }}

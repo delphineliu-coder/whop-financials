@@ -101,9 +101,9 @@ export default function SankeyChart({ period, periodType }: Props) {
     const gpExtY = gp.y + gp.height - opFlowH;
     const gpExtH = opFlowH;
 
-    // Op Income node is BELOW, roughly under the extension
-    const opNodeX = Math.max(gpExtX - 10, revFloor);
-    const opNodeY = gp.y + gp.height + 40;
+    // Op Income node is BELOW and slightly left — diagonal ~half the column span
+    const opNodeX = Math.max(gpExtX - 40, revFloor);
+    const opNodeY = gp.y + gp.height + 80;
     const opCY    = opNodeY + opNodeH / 2;
     const opRoom  = opNodeH >= 18;
 

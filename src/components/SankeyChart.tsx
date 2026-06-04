@@ -101,20 +101,19 @@ export default function SankeyChart({ period, periodType }: Props) {
     const gpExtY = gp.y + gp.height - opFlowH;
     const gpExtH = opFlowH;
 
-    // Op Income node is BELOW and slightly left — diagonal ~half the column span
-    const opNodeX = Math.max(gpExtX - 40, revFloor);
-    const opNodeY = gp.y + gp.height + 80;
+    // Op Income node: 120px to the left, slightly below the extension
+    const opNodeX = Math.max(gpExtX - 120, revFloor);
+    const opNodeY = gpExtY + 30;
     const opCY    = opNodeY + opNodeH / 2;
     const opRoom  = opNodeH >= 18;
 
-    // Band flows downward from the bottom edge of the extension to the top of Op Income
-    const srcY = gpExtY + gpExtH;  // = gp.y + gp.height
-    const dy   = (opNodeY - srcY) * 0.5;
+    // Bezier connects LEFT edge of extension → RIGHT edge of Op Income (longer sides)
+    const dx1 = (gpExtX - (opNodeX + NODE_W)) * 0.5;
     const opLinkPath = [
-      `M ${gpExtX},${srcY}`,
-      `C ${gpExtX},${srcY + dy} ${opNodeX},${opNodeY - dy} ${opNodeX},${opNodeY}`,
-      `L ${opNodeX + NODE_W},${opNodeY}`,
-      `C ${opNodeX + NODE_W},${opNodeY - dy} ${gpExtX + NODE_W},${srcY + dy} ${gpExtX + NODE_W},${srcY}`,
+      `M ${gpExtX},${gpExtY}`,
+      `C ${gpExtX - dx1},${gpExtY} ${opNodeX + NODE_W + dx1},${opNodeY + (opNodeH - opFlowH) / 2} ${opNodeX + NODE_W},${opNodeY + (opNodeH - opFlowH) / 2}`,
+      `L ${opNodeX + NODE_W},${opNodeY + (opNodeH + opFlowH) / 2}`,
+      `C ${opNodeX + NODE_W + dx1},${opNodeY + (opNodeH + opFlowH) / 2} ${gpExtX - dx1},${gpExtY + gpExtH} ${gpExtX},${gpExtY + gpExtH}`,
       'Z',
     ].join(' ');
 

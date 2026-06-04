@@ -48,7 +48,7 @@ const makeLabelsLayer = (
                 {fmt(actual)}
               </text>
               <text x={x} y={hasRoom ? cy + 17 : cy + 13} textAnchor={anchor}
-                fill="rgba(0,0,0,0.45)" fontSize={10} fontFamily="Inter, sans-serif">
+                fill="rgba(0,0,0,0.6)" fontSize={10} fontFamily="Inter, sans-serif">
                 {pct}
               </text>
             </g>
@@ -178,7 +178,7 @@ export default function SankeyChart({ period, periodType }: Props) {
           {fmt(operatingIncome)}
         </text>
         <text x={opNodeX - PAD} y={opRoom ? opCY + 17 : opCY + 13} textAnchor="end"
-          fill="rgba(0,0,0,0.45)" fontSize={10} fontFamily="Inter, sans-serif">
+          fill="rgba(0,0,0,0.6)" fontSize={10} fontFamily="Inter, sans-serif">
           {revenue > 0 ? `${((operatingIncome / revenue) * 100).toFixed(1)}% of rev` : ''}
         </text>
 
@@ -199,7 +199,7 @@ export default function SankeyChart({ period, periodType }: Props) {
           {fmt(netIncome)}
         </text>
         <text x={netNodeX - PAD} y={netRoom ? netCY + 17 : netCY + 13} textAnchor="end"
-          fill="rgba(0,0,0,0.45)" fontSize={10} fontFamily="Inter, sans-serif">
+          fill="rgba(0,0,0,0.6)" fontSize={10} fontFamily="Inter, sans-serif">
           {revenue > 0 ? `${((netIncome / revenue) * 100).toFixed(1)}% of rev` : ''}
         </text>
 
@@ -219,7 +219,7 @@ export default function SankeyChart({ period, periodType }: Props) {
               {otherIncome > 0 ? '+' : ''}{fmt(otherIncome)}
             </text>
             <text x={othrNodeX + NODE_W + PAD} y={othrRoom ? othrCY + 17 : othrCY + 13} textAnchor="start"
-              fill="rgba(0,0,0,0.45)" fontSize={10} fontFamily="Inter, sans-serif">
+              fill="rgba(0,0,0,0.6)" fontSize={10} fontFamily="Inter, sans-serif">
               {revenue > 0 ? `${((otherIncome / revenue) * 100).toFixed(1)}% of rev` : ''}
             </text>
           </>

@@ -38,9 +38,11 @@ export default function NodeDetail() {
         {nodeId === 'sm' ? (
           <p><strong>Cohort LTV/CAC details coming soon.</strong></p>
         ) : (
-          <p>Detailed breakdown for <strong>{label}</strong> coming soon.</p>
+          <>
+            <p>Detailed breakdown for <strong>{label}</strong> coming soon.</p>
+            <p className="placeholder-sub">This page will show line-item GL detail, MoM trend, and team allocation.</p>
+          </>
         )}
-        <p className="placeholder-sub">This page will show line-item GL detail, MoM trend, and team allocation.</p>
       </div>
     </div>
   );

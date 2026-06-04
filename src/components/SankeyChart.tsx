@@ -59,8 +59,8 @@ export default function SankeyChart({ period, periodType }: Props) {
   // Scale layout height so the Revenue bar visibly reflects absolute magnitude.
   // Revenue fills the full layout height, so a taller chart = a taller bar.
   const maxRevenue = Math.max(...getPeriods(periodType).map(p => p.revenue));
-  const LAYOUT_MIN = 540;
-  const LAYOUT_MAX = 700;
+  const LAYOUT_MIN = 680;
+  const LAYOUT_MAX = 880;
   const layoutH = LAYOUT_MIN + (LAYOUT_MAX - LAYOUT_MIN) * (period.revenue / maxRevenue);
   const containerH = Math.round(layoutH) + 20 + 200; // + top margin + bottom margin
 
@@ -146,7 +146,7 @@ export default function SankeyChart({ period, periodType }: Props) {
         nodeOpacity={1}
         nodeHoverOpacity={1}
         nodeThickness={24}
-        nodeSpacing={32}
+        nodeSpacing={56}
         nodeBorderRadius={3}
         nodeBorderWidth={0}
         linkOpacity={0.45}

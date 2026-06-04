@@ -35,7 +35,11 @@ export default function NodeDetail() {
       </div>
       <div className="detail-placeholder">
         <div className="placeholder-icon">📊</div>
-        <p>Detailed breakdown for <strong>{label}</strong> coming soon.</p>
+        {nodeId === 'sm' ? (
+          <p><strong>Cohort LTV/CAC details coming soon.</strong></p>
+        ) : (
+          <p>Detailed breakdown for <strong>{label}</strong> coming soon.</p>
+        )}
         <p className="placeholder-sub">This page will show line-item GL detail, MoM trend, and team allocation.</p>
       </div>
     </div>

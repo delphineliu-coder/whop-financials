@@ -101,17 +101,20 @@ export default function SankeyChart({ period, periodType }: Props) {
     const gpExtY = gp.y + gp.height - opFlowH;
     const gpExtH = opFlowH;
 
-    const opNodeX = Math.max(gpExtX - 60 - NODE_W, revFloor);
-    const opNodeY = gpExtY;
+    // Op Income node is BELOW, roughly under the extension
+    const opNodeX = Math.max(gpExtX - 10, revFloor);
+    const opNodeY = gp.y + gp.height + 40;
     const opCY    = opNodeY + opNodeH / 2;
     const opRoom  = opNodeH >= 18;
 
-    const dx1 = (gpExtX - (opNodeX + NODE_W)) * 0.5;
+    // Band flows downward from the bottom edge of the extension to the top of Op Income
+    const srcY = gpExtY + gpExtH;  // = gp.y + gp.height
+    const dy   = (opNodeY - srcY) * 0.5;
     const opLinkPath = [
-      `M ${gpExtX},${gpExtY}`,
-      `C ${gpExtX - dx1},${gpExtY} ${opNodeX + NODE_W + dx1},${opNodeY + (opNodeH - opFlowH) / 2} ${opNodeX + NODE_W},${opNodeY + (opNodeH - opFlowH) / 2}`,
-      `L ${opNodeX + NODE_W},${opNodeY + (opNodeH + opFlowH) / 2}`,
-      `C ${opNodeX + NODE_W + dx1},${opNodeY + (opNodeH + opFlowH) / 2} ${gpExtX - dx1},${gpExtY + gpExtH} ${gpExtX},${gpExtY + gpExtH}`,
+      `M ${gpExtX},${srcY}`,
+      `C ${gpExtX},${srcY + dy} ${opNodeX},${opNodeY - dy} ${opNodeX},${opNodeY}`,
+      `L ${opNodeX + NODE_W},${opNodeY}`,
+      `C ${opNodeX + NODE_W},${opNodeY - dy} ${gpExtX + NODE_W},${srcY + dy} ${gpExtX + NODE_W},${srcY}`,
       'Z',
     ].join(' ');
 

@@ -47,7 +47,7 @@ export default function OperatingIncomeDetail() {
     <div className="detail-page">
       <button className="back-btn" onClick={() => navigate(-1)}>← Back to Overview</button>
       <div className="detail-header">
-        <h1>Operating Performance</h1>
+        <h1>Burn Multiple</h1>
         <span className="detail-period">FY 2026 · Monthly</span>
       </div>
 

@@ -79,12 +79,12 @@ export default function OperatingIncomeDetail() {
         <svg viewBox={`0 0 ${W} ${H}`} style={{ width: '100%', height: 'auto', display: 'block' }}
           onMouseLeave={() => setHover(null)}>
 
-          {/* Actual shading */}
-          <rect x={ML} y={MT} width={xAt(4) - ML + slotW * 0.5} height={CH}
-            fill="rgba(0,0,0,0.025)" />
+          {/* Forecast shading */}
+          <rect x={xAt(4) + slotW * 0.5} y={MT} width={ML + CW - (xAt(4) + slotW * 0.5)} height={CH}
+            fill="rgba(59,130,246,0.07)" />
           <text x={ML + 5} y={MT + 14} fontSize={9} fill="rgba(0,0,0,0.3)"
             fontFamily="Inter,sans-serif" fontWeight="700" letterSpacing="0.5">ACTUAL</text>
-          <text x={xAt(5) + 5} y={MT + 14} fontSize={9} fill="rgba(0,0,0,0.3)"
+          <text x={xAt(5) + 5} y={MT + 14} fontSize={9} fill="rgba(59,130,246,0.5)"
             fontFamily="Inter,sans-serif" fontWeight="700" letterSpacing="0.5">FORECAST</text>
 
           {/* Zero line */}

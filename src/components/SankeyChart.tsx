@@ -117,7 +117,9 @@ export default function SankeyChart({ period, periodType }: Props) {
       <g>
         <rect x={gpExtX} y={gpExtY} width={NODE_W} height={gpExtH} fill={RED} rx={3} />
         <path d={opLinkPath} fill={`${RED}55`} />
-        <rect x={opNodeX} y={opNodeY} width={NODE_W} height={opNodeH} fill={RED} rx={3} />
+        <rect x={opNodeX} y={opNodeY} width={NODE_W} height={opNodeH} fill={RED} rx={3}
+          onClick={() => navigate('/detail/operatingIncome', { state: { period, nodeId: 'operatingIncome' } })}
+          style={{ cursor: 'pointer' }} />
         {opRoom && (
           <text x={opNodeX - PAD} y={opCY - 13} textAnchor="end"
             fill={RED} fontSize={11} fontFamily="Inter, sans-serif" opacity={0.85}>

@@ -80,7 +80,7 @@ export default function OperatingIncomeDetail() {
   const gtvTicks = [0, 250, 500, 750, 1000];
 
   // Chart 2 axes: EBITDA (left, fixed -6 to +6) + Burn Multiple (right, symmetric)
-  const ebitMin = -6, ebitMax = 6, ebitRange = 12;
+  const ebitMin = -6, ebitRange = 12;
   const yEbit = (v: number) => MT + CH * (1 - (v - ebitMin) / ebitRange);
   const ebitTicks = [-6, -3, 0, 3, 6];
 

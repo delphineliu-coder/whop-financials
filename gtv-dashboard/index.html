@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Whop GTV Insights</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #1a1a2e; color: #e0e0e0; padding: 40px; max-width: 1200px; margin: 0 auto; font-size: 14px; }
+  h1 { color: #ffffff; font-size: 22px; margin-bottom: 4px; }
+  .subtitle { color: #9ca3af; font-size: 13px; margin-bottom: 20px; }
+  .toggle { display: flex; gap: 0; margin-bottom: 32px; border-radius: 8px; overflow: hidden; width: fit-content; border: 1px solid #4c4c7f; }
+  .toggle button { padding: 8px 28px; border: none; cursor: pointer; font-size: 14px; font-weight: 600; transition: all 0.2s; }
+  .toggle button.active { background: #7c3aed; color: #fff; }
+  .toggle button:not(.active) { background: #22223a; color: #9ca3af; }
+  .toggle button:not(.active):hover { background: #2d2d4e; color: #e0e0e0; }
+  h2 { color: #ffffff; font-size: 20px; font-weight: 700; margin-top: 52px; margin-bottom: 16px; padding: 14px 18px; background: #25254a; border-left: 4px solid #7c3aed; border-radius: 0 8px 8px 0; letter-spacing: 0.01em; }
+  h3 { color: #c4b5fd; font-size: 15px; font-weight: 600; margin-top: 28px; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid #3a3a60; }
+  h4 { color: #d8b4fe; font-size: 13px; margin-top: 20px; margin-bottom: 6px; font-weight: 600; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px; }
+  th { background: #2d2d4e; color: #a78bfa; text-align: left; padding: 8px 12px; font-weight: 600; border-bottom: 2px solid #4c4c7f; }
+  td { padding: 7px 12px; border-bottom: 1px solid #2a2a3e; vertical-align: top; }
+  tr:hover td { background: #22223a; }
+  .signal { line-height: 1.5; }
+  .num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .positive { color: #4ade80; }
+  .negative { color: #f87171; }
+  .neutral { color: #9ca3af; }
+  .warn { color: #fb923c; font-weight: 600; }
+  .callout { background: #1e1e38; border-left: 3px solid #a78bfa; padding: 10px 14px; margin: 12px 0; border-radius: 0 6px 6px 0; font-size: 13px; color: #c4b5fd; line-height: 1.5; }
+  .view { display: none; }
+  .view.active { display: block; }
+</style>
+</head>
+<body>
+
+<h1>Whop GTV Insights</h1>
+<div class="subtitle" id="subtitle"></div>
+
+<div class="toggle">
+  <button class="active" onclick="setView('monthly')">Monthly</button>
+  <button onclick="setView('weekly')">Weekly</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ MONTHLY ═══ -->
+<div id="view-monthly" class="view active">
+
+<h2>1. Business Type</h2>
+<table>
+  <tr><th></th><th>Business Type</th><th>May GTV</th><th>GTV MoM</th><th>Buyers MoM</th><th>Buyers May'26</th><th>Take Rate</th><th>May'25 GTV</th><th>YoY GTV</th><th class="signal">Signal</th></tr>
+  <tr><td>🟢</td><td><b>Marketplace</b></td><td class="num">$20.7M</td><td class="num positive">+17.0%</td><td class="num positive">+3.9%</td><td class="num">124K</td><td class="num">3.3%</td><td class="num neutral">$0.19M</td><td class="num warn">new cat.</td><td class="signal">AOV-led growth (+21% AOV), supply contracting. Demand pulling prices up. Lowest take rate on platform — high-volume, thin-margin positioning. Category nascent a year ago; YoY not meaningful.</td></tr>
+  <tr><td>🟢</td><td><b>Services</b></td><td class="num">$49.1M</td><td class="num positive">+10.2%</td><td class="num positive">+16.9%</td><td class="num">244K</td><td class="num">4.1%</td><td class="num">$13.2M</td><td class="num positive">+271%</td><td class="signal">Pure demand story — buyers +17%, AOV -6%. Market absorbing supply. Tripled YoY on a per-seller take rate of 4.1% — growth is buyer-driven, not pricing.</td></tr>
+  <tr><td>🟢</td><td><b>Software</b></td><td class="num">$35.7M</td><td class="num positive">+9.3%</td><td class="num positive">+21.4%</td><td class="num">908K</td><td class="num">8.4%</td><td class="num">$9.1M</td><td class="num positive">+294%</td><td class="signal">Balanced expansion — buyers +21%, AOV -7%. Highest take rate (8.4%) signals pricing power. 4x YoY; fastest compounding of the major segments.</td></tr>
+  <tr><td>🟡</td><td><b>Physical Product</b></td><td class="num">$28.9M</td><td class="num positive">+5.9%</td><td class="num positive">+11.5%</td><td class="num">2.82M</td><td class="num">3.9%</td><td class="num neutral">$0.77M</td><td class="num warn">new cat.</td><td class="signal">Healthy at the surface, mixed internals — beauty/supplements spike masking accessories/electronics decline. 2.82M buyers = largest buyer base on platform. Low take rate (3.9%) reflects competitive physical goods margins.</td></tr>
+  <tr><td>🟡</td><td><b>Coaching & Courses</b></td><td class="num">$132.4M</td><td class="num positive">+1.9%</td><td class="num positive">+1.4%</td><td class="num">1.46M</td><td class="num">5.7%</td><td class="num">$41.2M</td><td class="num positive">+221%</td><td class="signal">Largest segment but stalling MoM (+1.9%). B&E declining (-5% MoM, -16% buyers) — partly offset by tech, real estate, hobbies. 3x YoY growth tells a longer compounding story the monthly view misses.</td></tr>
+  <tr><td>🟡</td><td><b>Paid Group</b></td><td class="num">$45.9M</td><td class="num positive">+2.5%</td><td class="num negative">-0.9%</td><td class="num">1.59M</td><td class="num">5.1%</td><td class="num">$33.5M</td><td class="num positive">+37%</td><td class="signal">Flat MoM. Buyers declining (-0.9%) but AOV up (+2.9%) — existing members spending more, acquisition stalling. Slowest YoY of the main segments (+37%); lagging platform growth.</td></tr>
+  <tr><td>🟡</td><td><b>Telehealth</b></td><td class="num">$2.4M</td><td class="num negative">-1.9%</td><td class="num positive">+39.8%</td><td class="num">3.7K</td><td class="num">4.9%</td><td class="num neutral">$0.08M</td><td class="num warn">new cat.</td><td class="signal">GTV dip but buyer count +40% — supply-side churn, not demand loss. Very small absolute buyer count (3.7K) suggests still nascent.</td></tr>
+  <tr><td>🔴</td><td><b>Events</b></td><td class="num">$6.5M</td><td class="num negative">-7.9%</td><td class="num negative">-89.4%</td><td class="num">121K</td><td class="num">7.5%</td><td class="num">$1.1M</td><td class="num positive">+503%</td><td class="signal">Structural break: buyers -89% while AOV spiked 7x. Shifting to fewer, very high-ticket events (hence 7.5% take rate — highest for event ticketing). 5x YoY growth is mostly a category-ramp story, not a signal of health today.</td></tr>
+</table>
+
+<h2>2. Business Type → Industry Group</h2>
+
+<h3>🟡 Coaching & Courses — growing slower than platform average</h3>
+<table>
+  <tr><th></th><th>Industry Group</th><th>May GTV</th><th>GTV MoM</th><th>Buyers MoM</th><th>May'25 GTV</th><th>YoY GTV</th><th class="signal">Signal</th></tr>
+  <tr><td>🔴</td><td>Business & Entrepreneurship</td><td class="num">$43.2M</td><td class="num negative">-5.1%</td><td class="num negative">-16.3%</td><td class="num">$14M</td><td class="num positive">+209%</td><td class="signal">The engine is stalling. Biggest sub-segment in the biggest business type — primary drag overall. Buyer demand genuinely softening.</td></tr>
+  <tr><td>🟡</td><td>Trading & Investing</td><td class="num">$25.0M</td><td class="num negative">-0.7%</td><td class="num positive">+3.0%</td><td class="num">$10M</td><td class="num positive">+150%</td><td class="signal">Flat. Holding volume but not growing.</td></tr>
+  <tr><td>🟢</td><td>Real Estate</td><td class="num">$13.4M</td><td class="num positive">+9.2%</td><td class="num positive">+1.5%</td><td class="num">$3.7M</td><td class="num positive">+262%</td><td class="signal">Steady acceleration across buyers and sellers.</td></tr>
+  <tr><td>🟢</td><td>Marketing & Advertising</td><td class="num">$4.5M</td><td class="num positive">+12.4%</td><td class="num positive">+40.2%</td><td class="num">$0.5M</td><td class="num positive">+800%</td><td class="signal">More buyers at lower price points — broadening the base.</td></tr>
+  <tr><td>🟢</td><td>Tech & Development</td><td class="num">$2.9M</td><td class="num positive">+37.5%</td><td class="num positive">+104.3%</td><td class="num">$0.5M</td><td class="num positive">+480%</td><td class="signal">Buyers doubled. Fastest-growing legitimate sub-segment. Early signal worth watching.</td></tr>
+  <tr><td>🟢</td><td>Publishing & Info Products</td><td class="num">$2.8M</td><td class="num positive">+29.7%</td><td class="num positive">+32.2%</td><td class="num">$0.6M</td><td class="num positive">+367%</td><td class="signal">Strong buyer pull.</td></tr>
+  <tr><td>🟢</td><td>Hobbies & Lifestyle</td><td class="num">$1.1M</td><td class="num positive">+48.8%</td><td class="num positive">+127.1%</td><td class="num">$0.2M</td><td class="num positive">+450%</td><td class="signal">Buyer explosion from a small base — emerging demand.</td></tr>
+  <tr><td>🔴</td><td>Miscellaneous</td><td class="num">$1.5M</td><td class="num negative">-27.2%</td><td class="num negative">-30.9%</td><td class="num">$2.5M</td><td class="num negative">-40%</td><td class="signal">Shrinking. Likely consolidating into defined categories.</td></tr>
+  <tr><td>🟢</td><td>Sports Betting & Gambling</td><td class="num">$0.4M</td><td class="num positive">+152.6%</td><td class="num positive">+73.3%</td><td class="num neutral">$0.05M</td><td class="num warn">new cat.</td><td class="signal">High-growth niche, small base.</td></tr>
+</table>
+
+<h3>🟢 Services — buyer-led, broad-based</h3>
+<table>
+  <tr><th></th><th>Industry Group</th><th>May GTV</th><th>GTV MoM</th><th>Buyers MoM</th><th>May'25 GTV</th><th>YoY GTV</th><th class="signal">Signal</th></tr>
+  <tr><td>🟡</td><td>Marketing & Advertising</td><td class="num">$14.5M</td><td class="num positive">+7.8%</td><td class="num positive">+18.3%</td><td class="num">$2.5M</td><td class="num positive">+480%</td><td class="signal">Largest sub-segment, growing steadily. Nothing exceptional.</td></tr>
+  <tr><td>🟡</td><td>Sales & Revenue</td><td class="num">$9.1M</td><td class="num positive">+6.1%</td><td class="num positive">+21.8%</td><td class="num">$1.5M</td><td class="num positive">+507%</td><td class="signal">Solid, buyer-driven.</td></tr>
+  <tr><td>🟢</td><td>Consulting</td><td class="num">$7.7M</td><td class="num positive">+22.9%</td><td class="num negative">-7.3%</td><td class="num neutral">$0.2M</td><td class="num warn">new cat.</td><td class="signal">Accelerating with pricing power. Fewer buyers, higher spend per buyer.</td></tr>
+  <tr><td>🟢</td><td>AI & Automation Agencies</td><td class="num">$4.9M</td><td class="num positive">+27.4%</td><td class="num positive">+47.0%</td><td class="num neutral">$0.04M</td><td class="num warn">new cat.</td><td class="signal">Fastest-growing in services. Both new buyers and new sellers. Clear AI demand tailwind.</td></tr>
+  <tr><td>🟢</td><td>Professional Services</td><td class="num">$4.4M</td><td class="num positive">+21.0%</td><td class="num positive">+89.3%</td><td class="num">$1.6M</td><td class="num positive">+175%</td><td class="signal">Near-doubling in buyer count. Strongest demand signal in the category.</td></tr>
+  <tr><td>🟢</td><td>Logistics & Transportation</td><td class="num">$0.8M</td><td class="num positive">+63.2%</td><td class="num neutral">0%</td><td class="num neutral">$0.1M</td><td class="num warn">new cat.</td><td class="signal">GTV jumped but zero buyer growth — a few large new contracts, not broad demand.</td></tr>
+  <tr><td>🔴</td><td>Home & Trade Services</td><td class="num">$0.3M</td><td class="num negative">-63.4%</td><td class="num negative">-11.0%</td><td class="num">$0.5M</td><td class="num negative">-40%</td><td class="signal">Sharp decline. May be migrating off-platform.</td></tr>
+</table>
+
+<h3>🟢 Software — healthy growth, clear AI tailwind</h3>
+<table>
+  <tr><th></th><th>Industry Group</th><th>May GTV</th><th>GTV MoM</th><th>Buyers MoM</th><th>May'25 GTV</th><th>YoY GTV</th><th class="signal">Signal</th></tr>
+  <tr><td>🟡</td><td>Trading & Investing</td><td class="num">$17.1M</td><td class="num positive">+1.6%</td><td class="num positive">+13.4%</td><td class="num">$6.9M</td><td class="num positive">+148%</td><td class="signal">Largest sub-segment, barely moving. Mature and stable.</td></tr>
+  <tr><td>🟢</td><td>Marketing & Advertising</td><td class="num">$6.7M</td><td class="num positive">+16.9%</td><td class="num positive">+35.3%</td><td class="num neutral">$0.01M</td><td class="num warn">new cat.</td><td class="signal">Buyers and revenue growing together.</td></tr>
+  <tr><td>🟢</td><td>AI & Automation Software</td><td class="num">$2.6M</td><td class="num positive">+30.2%</td><td class="num positive">+3.4%</td><td class="num neutral">$0.04M</td><td class="num warn">new cat.</td><td class="signal">Accelerating. Buyer growth outpacing new tools — supply-constrained.</td></tr>
+  <tr><td>🟢</td><td>E-commerce Software</td><td class="num">$2.2M</td><td class="num positive">+15.1%</td><td class="num positive">+30.7%</td><td class="num neutral">$0.2M</td><td class="num positive">+1,000%</td><td class="signal">Consistent growth across buyers and GTV.</td></tr>
+  <tr><td>🟢</td><td>Digital Goods & Accounts</td><td class="num">$1.5M</td><td class="num positive">+28.4%</td><td class="num positive">+61.9%</td><td class="num neutral">$0.3M</td><td class="num positive">+400%</td><td class="signal">Buyer growth strong — access-based products gaining traction.</td></tr>
+  <tr><td>🟢</td><td>Miscellaneous</td><td class="num">$1.0M</td><td class="num positive">+47.5%</td><td class="num positive">+146.4%</td><td class="num neutral">$0.5M</td><td class="num positive">+100%</td><td class="signal">Buyer explosion. Fast-growing unlabeled tail — worth better categorization.</td></tr>
+  <tr><td>🟡</td><td>Security & Privacy</td><td class="num">$1.2M</td><td class="num negative">-2.7%</td><td class="num positive">+18.5%</td><td class="num neutral">$0.05M</td><td class="num warn">new cat.</td><td class="signal">Flat GTV. Holding volume.</td></tr>
+</table>
+
+<h3>🟡 Physical Product — strong pockets, meaningful drags</h3>
+<table>
+  <tr><th></th><th>Industry Group</th><th>May GTV</th><th>GTV MoM</th><th>Buyers MoM</th><th>May'25 GTV</th><th>YoY GTV</th><th class="signal">Signal</th></tr>
+  <tr><td>🟡</td><td>Clothing & Apparel</td><td class="num">$17.4M</td><td class="num positive">+7.2%</td><td class="num positive">+10.3%</td><td class="num neutral">$0.007M</td><td class="num warn">new cat.</td><td class="signal">Largest sub-segment, healthy but unremarkable growth.</td></tr>
+  <tr><td>🔴</td><td>Accessories</td><td class="num">$3.8M</td><td class="num negative">-29.0%</td><td class="num negative">-29.9%</td><td class="num neutral">$0.03M</td><td class="num warn">new cat.</td><td class="signal">Real demand decline — both GTV and buyers down ~30%.</td></tr>
+  <tr><td>🟢</td><td>Home & Living</td><td class="num">$2.3M</td><td class="num positive">+47.7%</td><td class="num positive">+43.3%</td><td class="num neutral">$0.001M</td><td class="num warn">new cat.</td><td class="signal">Strong buyer growth, not just AOV. Broad-based demand.</td></tr>
+  <tr><td>🟢</td><td>Beauty & Personal Care</td><td class="num">$1.3M</td><td class="num positive">+135.9%</td><td class="num positive">+267.9%</td><td class="num neutral">$0.001M</td><td class="num warn">new cat.</td><td class="signal">Explosive growth — but likely concentrated in 1–2 large sellers. Flag for dependency risk.</td></tr>
+  <tr><td>🟢</td><td>Supplements & Nutrition</td><td class="num">$1.1M</td><td class="num positive">+185.6%</td><td class="num positive">+448.3%</td><td class="num neutral">$0.001M</td><td class="num warn">new cat.</td><td class="signal">Same pattern as beauty — high growth, likely concentrated.</td></tr>
+  <tr><td>🔴</td><td>Electronics & Gadgets</td><td class="num">$0.4M</td><td class="num negative">-23.8%</td><td class="num negative">-55.6%</td><td class="num neutral">$0.1M</td><td class="num warn">new cat.</td><td class="signal">Buyer collapse. Demand genuinely shrinking.</td></tr>
+  <tr><td>🟢</td><td>Food & Beverages</td><td class="num">$0.25M</td><td class="num positive">+51.3%</td><td class="num positive">+66.6%</td><td class="num neutral">$0.001M</td><td class="num warn">new cat.</td><td class="signal">Small but accelerating.</td></tr>
+</table>
+
+<h3>🟢 Marketplace — breakout momentum</h3>
+<table>
+  <tr><th></th><th>Industry Group</th><th>May GTV</th><th>GTV MoM</th><th>Buyers MoM</th><th>May'25 GTV</th><th>YoY GTV</th><th class="signal">Signal</th></tr>
+  <tr><td>🟡</td><td>Digital & Education</td><td class="num">$15.0M</td><td class="num positive">+8.3%</td><td class="num negative">-1.3%</td><td class="num neutral">$0.003M</td><td class="num warn">new cat.</td><td class="signal">Volume base, growing steadily. Not the growth story.</td></tr>
+  <tr><td>🟢</td><td>Service Marketplaces</td><td class="num">$5.3M</td><td class="num positive">+50.5%</td><td class="num positive">+27.2%</td><td class="num neutral">$0.04M</td><td class="num warn">new cat.</td><td class="signal">Clear breakout. Buyers and GTV both accelerating. Network effects taking hold.</td></tr>
+  <tr><td>🟢</td><td>Product Marketplaces</td><td class="num">$0.3M</td><td class="num positive">+64.2%</td><td class="num positive">+165.5%</td><td class="num neutral">$0.001M</td><td class="num warn">new cat.</td><td class="signal">Strong from a small base. High buyer acquisition.</td></tr>
+</table>
+
+<h2>3. By Region</h2>
+<table>
+  <tr><th></th><th>Region</th><th>May GTV</th><th>GTV MoM</th><th>Summary</th></tr>
+  <tr><td>🔴</td><td><b>APAC</b></td><td class="num">$25.2M</td><td class="num negative">-12.9%</td><td>Only declining major region. Concentrated risk in one business type.</td></tr>
+  <tr><td>🟢</td><td><b>LATAM</b></td><td class="num">$8.4M</td><td class="num positive">+13.6%</td><td>Single-driver growth. Coaching carries the region.</td></tr>
+  <tr><td>🟢</td><td><b>UK</b></td><td class="num">$9.1M</td><td class="num positive">+12.5%</td><td>Broad signals. Coaching and software growing; services a headwind.</td></tr>
+  <tr><td>🟢</td><td><b>Other</b></td><td class="num">$71.6M</td><td class="num positive">+11.6%</td><td>Multiple engines firing. Services and physical product accelerating.</td></tr>
+</table>
+
+<h3>3.1 Region → Business Type</h3>
+
+<h4>🔴 APAC — concentrated risk, not broad softness</h4>
+<table>
+  <tr><th></th><th>Business Type</th><th>May GTV</th><th>GTV MoM</th><th>Buyers MoM</th><th class="signal">Signal</th></tr>
+  <tr><td>🔴</td><td>Coaching & Courses</td><td class="num">$11.6M</td><td class="num negative">-31.6%</td><td class="num negative">-47.6%</td><td class="signal">The entire region's decline traces here. Buyer demand genuinely fallen.</td></tr>
+  <tr><td>🟢</td><td>Marketplace</td><td class="num">$4.3M</td><td class="num positive">+62.6%</td><td class="num positive">+28.4%</td><td class="signal">Strong breakout driven by service marketplaces. Bright spot.</td></tr>
+  <tr><td>🟢</td><td>Physical Product</td><td class="num">$2.8M</td><td class="num positive">+66.6%</td><td class="num positive">+135.0%</td><td class="signal">High growth but almost certainly concentrated. See industry drill-down.</td></tr>
+  <tr><td>🟡</td><td>Services</td><td class="num">$2.4M</td><td class="num positive">+7.9%</td><td class="num positive">+15.4%</td><td class="signal">Modest positive. Holding.</td></tr>
+  <tr><td>🟡</td><td>Software</td><td class="num">$1.5M</td><td class="num negative">-15.3%</td><td class="num positive">+6.4%</td><td class="signal">GTV declining but buyers growing — supply-side contraction, not demand loss.</td></tr>
+  <tr><td>🔴</td><td>Events</td><td class="num">$0.2M</td><td class="num negative">-83.5%</td><td class="num negative">-99.4%</td><td class="signal">Near-total buyer collapse. Structural shift.</td></tr>
+</table>
+<div class="callout">🔬 APAC coaching > B&E: $5.8M, -51% (buyers -68%). Sole cause of the regional decline. Investigate seller attrition vs. demand shift out of category. Physical product > beauty & personal care: $42K → $978K in one month (buyers up 78x) — almost certainly a single large seller. Flag for concentration dependency.</div>
+
+<h4>🟢 LATAM — single-driver growth, shallow diversification</h4>
+<table>
+  <tr><th></th><th>Business Type</th><th>May GTV</th><th>GTV MoM</th><th>Buyers MoM</th><th class="signal">Signal</th></tr>
+  <tr><td>🟢</td><td>Coaching & Courses</td><td class="num">$6.4M</td><td class="num positive">+19.2%</td><td class="num positive">+43.8%</td><td class="signal">Carrying the entire region. Strong buyer acquisition.</td></tr>
+  <tr><td>🟡</td><td>Paid Group</td><td class="num">$0.3M</td><td class="num positive">+21.3%</td><td class="num negative">-8.1%</td><td class="signal">Small but growing.</td></tr>
+  <tr><td>🟡</td><td>Software</td><td class="num">$0.9M</td><td class="num negative">-2.6%</td><td class="num negative">-1.9%</td><td class="signal">Flat.</td></tr>
+  <tr><td>🔴</td><td>Physical Product</td><td class="num">$0.2M</td><td class="num negative">-14.5%</td><td class="num negative">-16.6%</td><td class="signal">Declining across buyers and GTV.</td></tr>
+</table>
+<div class="callout">⚠️ Growth is concentrated in coaching. If that softens, LATAM goes negative fast. Coaching > B&E (buyers +139%) and real estate (+197%) are the key drivers.</div>
+
+<h4>🟢 UK — broad signals, one meaningful concern</h4>
+<table>
+  <tr><th></th><th>Business Type</th><th>May GTV</th><th>GTV MoM</th><th>Buyers MoM</th><th class="signal">Signal</th></tr>
+  <tr><td>🟢</td><td>Coaching & Courses</td><td class="num">$4.5M</td><td class="num positive">+15.5%</td><td class="num positive">+4.9%</td><td class="signal">Steady and consistent. Real estate doubled, fitness recovering.</td></tr>
+  <tr><td>🟢</td><td>Software</td><td class="num">$1.1M</td><td class="num positive">+64.2%</td><td class="num positive">+9.7%</td><td class="signal">Outsized growth. AI tools and e-commerce leading. Note: miscellaneous spike (+1,605%) is likely a single product.</td></tr>
+  <tr><td>🟡</td><td>Paid Group</td><td class="num">$1.8M</td><td class="num positive">+9.1%</td><td class="num positive">+1.9%</td><td class="signal">Steady.</td></tr>
+  <tr><td>🔴</td><td>Services</td><td class="num">$1.3M</td><td class="num negative">-9.5%</td><td class="num positive">+11.2%</td><td class="signal">GTV and supply declining. Demand not following.</td></tr>
+  <tr><td>🔴</td><td>Physical Product</td><td class="num">$0.3M</td><td class="num negative">-25.6%</td><td class="num negative">-29.0%</td><td class="signal">Buyers down meaningfully. Demand softening.</td></tr>
+</table>
+
+<h4>🟢 Other — broad-based, multiple engines firing</h4>
+<table>
+  <tr><th></th><th>Business Type</th><th>May GTV</th><th>GTV MoM</th><th>Buyers MoM</th><th class="signal">Signal</th></tr>
+  <tr><td>🟢</td><td>Coaching & Courses</td><td class="num">$32.8M</td><td class="num positive">+11.8%</td><td class="num positive">+6.8%</td><td class="signal">Large and still growing. Marketing & advertising coaching buyers near-tripled; hobbies emerging.</td></tr>
+  <tr><td>🟢</td><td>Services</td><td class="num">$14.7M</td><td class="num positive">+19.0%</td><td class="num positive">+23.2%</td><td class="signal">AI agencies, consulting, and professional services all accelerating.</td></tr>
+  <tr><td>🟢</td><td>Physical Product</td><td class="num">$5.3M</td><td class="num positive">+41.2%</td><td class="num positive">+51.0%</td><td class="signal">Genuine growth across multiple sub-categories. Clothing, home & living, and home improvement all expanding.</td></tr>
+  <tr><td>🟡</td><td>Paid Group</td><td class="num">$6.4M</td><td class="num positive">+4.5%</td><td class="num negative">-8.1%</td><td class="signal">Modest positive.</td></tr>
+  <tr><td>🔴</td><td>Software</td><td class="num">$9.4M</td><td class="num negative">-1.9%</td><td class="num positive">+35.8%</td><td class="signal">GTV declining despite supply growing — possible oversaturation or pricing pressure.</td></tr>
+</table>
+
+</div><!-- end monthly -->
+
+<!-- ═══════════════════════════════════════════════════ WEEKLY ═══ -->
+<div id="view-weekly" class="view">
+
+<h2>1. Business Type</h2>
+<table>
+  <tr><th></th><th>Business Type</th><th>Wk GTV</th><th>Prev Wk</th><th>GTV WoW</th><th>Buyers WoW</th><th>AOV WoW</th><th class="signal">Signal</th></tr>
+  <tr><td>🟢</td><td><b>Physical Product</b></td><td class="num">$7.4M</td><td class="num">$6.5M</td><td class="num positive">+14.1%</td><td class="num positive">+12.4%</td><td class="num negative">-0.9%</td><td class="signal">Buyer-led acceleration. Clothing & apparel driving the bulk of it with genuine volume expansion.</td></tr>
+  <tr><td>🟢</td><td><b>Software</b></td><td class="num">$9.4M</td><td class="num">$8.3M</td><td class="num positive">+12.3%</td><td class="num positive">+0.6%</td><td class="num positive">+8.8%</td><td class="signal">AOV-led. AI tools and gaming software outperforming. Buyers stable — quality, not volume.</td></tr>
+  <tr><td>🟡</td><td><b>Coaching & Courses</b></td><td class="num">$31.6M</td><td class="num">$32.0M</td><td class="num negative">-1.4%</td><td class="num positive">+0.2%</td><td class="num negative">-1.2%</td><td class="signal">Flat week. B&E continuing its monthly decline; fitness and personal finance offsetting partially.</td></tr>
+  <tr><td>🟡</td><td><b>Marketplace</b></td><td class="num">$4.0M</td><td class="num">$4.1M</td><td class="num negative">-1.1%</td><td class="num negative">-4.3%</td><td class="num positive">+2.7%</td><td class="signal">Supply expanding (bots +21%) but buyers declining — new sellers not yet converting demand.</td></tr>
+  <tr><td>🟡</td><td><b>Telehealth</b></td><td class="num">$0.55M</td><td class="num">$0.55M</td><td class="num negative">-0.6%</td><td class="num negative">-0.9%</td><td class="num negative">-0.6%</td><td class="signal">Flat. No signal.</td></tr>
+  <tr><td>🔴</td><td><b>Services</b></td><td class="num">$11.7M</td><td class="num">$13.5M</td><td class="num negative">-13.3%</td><td class="num positive">+6.7%</td><td class="num negative">-17.5%</td><td class="signal">Sharp single-week reversal after a strong month. AI & automation agencies collapsed -65% WoW — likely project-based revenue concentration or a single large seller churning. Worth monitoring next week.</td></tr>
+  <tr><td>🔴</td><td><b>Paid Group</b></td><td class="num">$10.4M</td><td class="num">$10.9M</td><td class="num negative">-4.5%</td><td class="num negative">-2.6%</td><td class="num negative">-1.8%</td><td class="signal">Buyers and GTV both declining. Consistent softness.</td></tr>
+  <tr><td>🔴</td><td><b>Events</b></td><td class="num">$2.0M</td><td class="num">$2.1M</td><td class="num negative">-7.6%</td><td class="num negative">-8.9%</td><td class="num positive">+2.5%</td><td class="signal">Continuing structural weakness from monthly trend.</td></tr>
+</table>
+
+<h2>2. Business Type → Industry Group</h2>
+
+<h3>🟡 Coaching & Courses — flat week, mixed internals</h3>
+<table>
+  <tr><th></th><th>Industry Group</th><th>Wk GTV</th><th>GTV WoW</th><th>Buyers WoW</th><th class="signal">Signal</th></tr>
+  <tr><td>🔴</td><td>Business & Entrepreneurship</td><td class="num">$8.7M</td><td class="num negative">-9.1%</td><td class="num positive">+2.0%</td><td class="signal">Continuing monthly decline trend. GTV falling even as buyer count edges up — AOV compression.</td></tr>
+  <tr><td>🟡</td><td>Trading & Investing</td><td class="num">$6.5M</td><td class="num positive">+5.2%</td><td class="num negative">-9.9%</td><td class="signal">GTV up but buyers down — fewer, higher-spending buyers. Concentration building.</td></tr>
+  <tr><td>🔴</td><td>Real Estate</td><td class="num">$3.3M</td><td class="num negative">-7.9%</td><td class="num negative">-0.4%</td><td class="signal">Monthly strength not carrying into this week.</td></tr>
+  <tr><td>🟢</td><td>Fitness & Athletics</td><td class="num">$2.7M</td><td class="num positive">+9.8%</td><td class="num positive">+27.5%</td><td class="signal">Strong buyer growth — a real demand signal. Recovery in progress.</td></tr>
+  <tr><td>🟡</td><td>Sales & Revenue</td><td class="num">$2.3M</td><td class="num positive">+5.4%</td><td class="num positive">+2.9%</td><td class="signal">Steady positive.</td></tr>
+  <tr><td>🟢</td><td>Personal Finance</td><td class="num">$0.8M</td><td class="num positive">+188.4%</td><td class="num positive">+58.6%</td><td class="signal">Spike from a small base. New seller(s) entering or seasonal push — watch next week to confirm if this is structural.</td></tr>
+  <tr><td>🔴</td><td>Tech & Development</td><td class="num">$0.5M</td><td class="num negative">-21.5%</td><td class="num negative">-5.7%</td><td class="signal">Reversal after strong month. Possibly lumpy revenue.</td></tr>
+  <tr><td>🔴</td><td>Health & Wellness</td><td class="num">$0.6M</td><td class="num negative">-20.9%</td><td class="num positive">+10.6%</td><td class="signal">GTV dropping sharply while buyers grow — severe AOV compression.</td></tr>
+</table>
+
+<h3>🔴 Services — sharp single-week reversal</h3>
+<table>
+  <tr><th></th><th>Industry Group</th><th>Wk GTV</th><th>GTV WoW</th><th>Buyers WoW</th><th class="signal">Signal</th></tr>
+  <tr><td>🔴</td><td>Marketing & Advertising</td><td class="num">$3.5M</td><td class="num negative">-12.1%</td><td class="num positive">+2.0%</td><td class="signal">GTV falling with buyers flat — AOV compression or pricing change.</td></tr>
+  <tr><td>🔴</td><td>Sales & Revenue</td><td class="num">$2.3M</td><td class="num negative">-5.5%</td><td class="num negative">-5.5%</td><td class="signal">Buyers and GTV declining in tandem.</td></tr>
+  <tr><td>🟡</td><td>Consulting</td><td class="num">$1.9M</td><td class="num negative">-1.9%</td><td class="num positive">+9.9%</td><td class="signal">Essentially flat. Buyers growing but GTV not following — pricing softening.</td></tr>
+  <tr><td>🟢</td><td>Professional Services</td><td class="num">$1.1M</td><td class="num positive">+23.2%</td><td class="num positive">+30.7%</td><td class="signal">Strong buyer growth continuing from monthly trend. Bright spot in a down week for services.</td></tr>
+  <tr><td>🔴</td><td>AI & Automation Agencies</td><td class="num">$0.7M</td><td class="num negative">-64.8%</td><td class="num negative">-58.7%</td><td class="signal">Dramatic single-week collapse — down 65% in GTV and buyers. Contrast with +27% MoM. Likely a concentrated revenue event in prior week, or a major seller churning. High priority to investigate.</td></tr>
+  <tr><td>🟢</td><td>Creative & Content Creation</td><td class="num">$0.7M</td><td class="num positive">+15.1%</td><td class="num positive">+52.8%</td><td class="signal">Buyer surge continues. New demand entering this sub-segment.</td></tr>
+</table>
+
+<h3>🟢 Software — AOV-driven strength</h3>
+<table>
+  <tr><th></th><th>Industry Group</th><th>Wk GTV</th><th>GTV WoW</th><th>Buyers WoW</th><th class="signal">Signal</th></tr>
+  <tr><td>🟡</td><td>Trading & Investing</td><td class="num">$4.4M</td><td class="num positive">+7.3%</td><td class="num positive">+0.7%</td><td class="signal">Stable base, slight positive momentum.</td></tr>
+  <tr><td>🟢</td><td>Marketing & Advertising</td><td class="num">$1.7M</td><td class="num positive">+21.5%</td><td class="num positive">+5.9%</td><td class="signal">Strong growth continuing from monthly trend.</td></tr>
+  <tr><td>🟢</td><td>AI & Automation Software</td><td class="num">$0.6M</td><td class="num positive">+39.9%</td><td class="num positive">+2.0%</td><td class="signal">Supply-constrained growth — buyers steady but AOV expanding. Strong signal.</td></tr>
+  <tr><td>🟢</td><td>Gaming & Entertainment</td><td class="num">$0.5M</td><td class="num positive">+72.8%</td><td class="num positive">+10.7%</td><td class="signal">Breakout week. Emerging demand or new launch — watch for consistency.</td></tr>
+  <tr><td>🟢</td><td>Miscellaneous</td><td class="num">$0.15M</td><td class="num positive">+42.7%</td><td class="num positive">+2.2%</td><td class="signal">Continuing fast-growing tail.</td></tr>
+  <tr><td>🟢</td><td>Productivity & Business Ops</td><td class="num">$0.05M</td><td class="num positive">+88.0%</td><td class="num positive">+33.1%</td><td class="signal">Small but strong growth — new category emerging.</td></tr>
+</table>
+
+<h3>🟢 Physical Product — broad-based acceleration</h3>
+<table>
+  <tr><th></th><th>Industry Group</th><th>Wk GTV</th><th>GTV WoW</th><th>Buyers WoW</th><th class="signal">Signal</th></tr>
+  <tr><td>🟢</td><td>Clothing & Apparel</td><td class="num">$4.6M</td><td class="num positive">+24.6%</td><td class="num positive">+25.4%</td><td class="signal">Strong, broad-based growth. Buyers and GTV in sync — genuine demand expansion.</td></tr>
+  <tr><td>🟡</td><td>Accessories</td><td class="num">$0.8M</td><td class="num positive">+2.1%</td><td class="num negative">-0.2%</td><td class="signal">Flat. Monthly decline appears to be stabilizing.</td></tr>
+  <tr><td>🟡</td><td>Supplements & Nutrition</td><td class="num">$0.5M</td><td class="num positive">+0.7%</td><td class="num negative">-2.8%</td><td class="signal">Flat. Monthly spike normalizing.</td></tr>
+  <tr><td>🟡</td><td>Beauty & Personal Care</td><td class="num">$0.4M</td><td class="num negative">-3.0%</td><td class="num negative">-19.0%</td><td class="signal">Buyers declining fast — confirms the monthly spike was a single seller event, not sustainable.</td></tr>
+  <tr><td>🟢</td><td>Electronics & Gadgets</td><td class="num">$0.08M</td><td class="num positive">+234.1%</td><td class="num positive">+32.4%</td><td class="signal">Recovery from near-zero base — watch whether this holds next week.</td></tr>
+</table>
+
+<h3>🟡 Marketplace — supply building, demand lagging</h3>
+<table>
+  <tr><th></th><th>Industry Group</th><th>Wk GTV</th><th>GTV WoW</th><th>Buyers WoW</th><th class="signal">Signal</th></tr>
+  <tr><td>🟡</td><td>Digital & Education</td><td class="num">$2.7M</td><td class="num positive">+6.5%</td><td class="num negative">-4.2%</td><td class="signal">GTV up but buyers falling — AOV expansion or fewer, higher-value transactions.</td></tr>
+  <tr><td>🔴</td><td>Service Marketplaces</td><td class="num">$1.3M</td><td class="num negative">-13.6%</td><td class="num negative">-4.7%</td><td class="signal">Reversal of the monthly breakout. Could be weekly volatility — needs a second data point to confirm trend change.</td></tr>
+</table>
+
+<h2>3. By Region</h2>
+<table>
+  <tr><th></th><th>Region</th><th>Wk GTV</th><th>GTV WoW</th><th>Summary</th></tr>
+  <tr><td>🔴</td><td><b>APAC</b></td><td class="num">~$4.4M</td><td class="num negative">Broad weakness</td><td>Coaching, marketplace, and physical product all declining WoW. Paid group the only bright spot.</td></tr>
+  <tr><td>🔴</td><td><b>LATAM</b></td><td class="num">~$1.7M</td><td class="num negative">Reversal</td><td>Monthly coaching strength reverting. Physical product and paid group holding positive.</td></tr>
+  <tr><td>🟡</td><td><b>Other</b></td><td class="num">~$18.6M</td><td class="num neutral">Mixed</td><td>Coaching flat, physical product accelerating, services in sharp reversal.</td></tr>
+  <tr><td>🟡</td><td><b>UK</b></td><td class="num">~$1.9M</td><td class="num neutral">Flat</td><td>Coaching holding, services and paid group declining, software flat.</td></tr>
+</table>
+
+<h3>3.1 Region → Business Type</h3>
+
+<h4>🔴 APAC — broad weekly decline</h4>
+<table>
+  <tr><th></th><th>Business Type</th><th>Wk GTV</th><th>GTV WoW</th><th>Buyers WoW</th><th class="signal">Signal</th></tr>
+  <tr><td>🔴</td><td>Coaching & Courses</td><td class="num">$1.95M</td><td class="num negative">-17.7%</td><td class="num negative">-8.0%</td><td class="signal">Continuing monthly decline. No recovery signal yet.</td></tr>
+  <tr><td>🔴</td><td>Marketplace</td><td class="num">$0.98M</td><td class="num negative">-19.3%</td><td class="num negative">-1.7%</td><td class="signal">Reversal of strong monthly trend. Buyers holding but GTV collapsing — AOV compression.</td></tr>
+  <tr><td>🔴</td><td>Physical Product</td><td class="num">$0.61M</td><td class="num negative">-15.1%</td><td class="num negative">-31.5%</td><td class="signal">Buyer collapse confirms beauty spike was concentrated. Underlying demand weak.</td></tr>
+  <tr><td>🟡</td><td>Services</td><td class="num">$0.63M</td><td class="num positive">+1.6%</td><td class="num positive">+7.9%</td><td class="signal">Flat but positive. Only stable segment in APAC this week.</td></tr>
+  <tr><td>🟢</td><td>Paid Group</td><td class="num">$0.59M</td><td class="num positive">+8.0%</td><td class="num positive">+5.8%</td><td class="signal">Positive momentum — only growing segment in APAC this week.</td></tr>
+  <tr><td>🟢</td><td>Software</td><td class="num">$0.28M</td><td class="num positive">+41.7%</td><td class="num negative">-17.6%</td><td class="signal">GTV surging but buyers declining — strong AOV expansion. Concentrated sellers.</td></tr>
+</table>
+
+<h4>🔴 LATAM — monthly trend reversing</h4>
+<table>
+  <tr><th></th><th>Business Type</th><th>Wk GTV</th><th>GTV WoW</th><th>Buyers WoW</th><th class="signal">Signal</th></tr>
+  <tr><td>🔴</td><td>Coaching & Courses</td><td class="num">$1.09M</td><td class="num negative">-16.6%</td><td class="num negative">-7.3%</td><td class="signal">Monthly B&E and overall coaching strength not holding weekly. Risk to LATAM growth story.</td></tr>
+  <tr><td>🟢</td><td>Physical Product</td><td class="num">$0.16M</td><td class="num positive">+24.4%</td><td class="num positive">+6.7%</td><td class="signal">Reversal of monthly decline — small but positive signal.</td></tr>
+  <tr><td>🟢</td><td>Paid Group</td><td class="num">$0.06M</td><td class="num positive">+24.6%</td><td class="num negative">-16.4%</td><td class="signal">GTV growing, buyers declining — AOV-driven.</td></tr>
+  <tr><td>🔴</td><td>Software</td><td class="num">$0.24M</td><td class="num negative">-9.2%</td><td class="num positive">+32.4%</td><td class="signal">Buyers growing but GTV falling — heavy pricing pressure.</td></tr>
+</table>
+
+<h4>🟡 Other — physical product strong, services reversal</h4>
+<table>
+  <tr><th></th><th>Business Type</th><th>Wk GTV</th><th>GTV WoW</th><th>Buyers WoW</th><th class="signal">Signal</th></tr>
+  <tr><td>🟡</td><td>Coaching & Courses</td><td class="num">$8.29M</td><td class="num positive">+0.3%</td><td class="num negative">-1.7%</td><td class="signal">Flat. Monthly momentum not showing in weekly cadence.</td></tr>
+  <tr><td>🔴</td><td>Services</td><td class="num">$3.59M</td><td class="num negative">-27.9%</td><td class="num positive">+6.3%</td><td class="signal">Sharp weekly drop despite buyer growth — severe AOV compression. Possible large contracts not recurring.</td></tr>
+  <tr><td>🟢</td><td>Physical Product</td><td class="num">$1.89M</td><td class="num positive">+17.4%</td><td class="num positive">+24.5%</td><td class="signal">Accelerating. Clothing & apparel driving broad-based buyer growth.</td></tr>
+  <tr><td>🟡</td><td>Software</td><td class="num">$2.33M</td><td class="num positive">+6.1%</td><td class="num positive">+16.6%</td><td class="signal">Steady positive — buyers growing healthily.</td></tr>
+  <tr><td>🔴</td><td>Paid Group</td><td class="num">$1.46M</td><td class="num negative">-13.6%</td><td class="num positive">+1.3%</td><td class="signal">GTV falling while buyers hold — AOV compression.</td></tr>
+  <tr><td>🔴</td><td>Events</td><td class="num">$0.30M</td><td class="num negative">-34.7%</td><td class="num positive">+4.7%</td><td class="signal">Continuing structural decline.</td></tr>
+</table>
+
+<h4>🟡 UK — holding steady</h4>
+<table>
+  <tr><th></th><th>Business Type</th><th>Wk GTV</th><th>GTV WoW</th><th>Buyers WoW</th><th class="signal">Signal</th></tr>
+  <tr><td>🟡</td><td>Coaching & Courses</td><td class="num">$0.96M</td><td class="num negative">-3.4%</td><td class="num positive">+3.6%</td><td class="signal">Slight GTV dip but buyers growing — holding position.</td></tr>
+  <tr><td>🟡</td><td>Software</td><td class="num">$0.17M</td><td class="num positive">+1.1%</td><td class="num positive">+6.9%</td><td class="signal">Flat but buyers growing steadily.</td></tr>
+  <tr><td>🔴</td><td>Services</td><td class="num">$0.39M</td><td class="num negative">-20.3%</td><td class="num negative">-1.8%</td><td class="signal">Sharp weekly decline continuing monthly trend.</td></tr>
+  <tr><td>🔴</td><td>Paid Group</td><td class="num">$0.38M</td><td class="num negative">-11.2%</td><td class="num negative">-2.5%</td><td class="signal">Declining across both dimensions.</td></tr>
+</table>
+
+</div><!-- end weekly -->
+
+<script>
+  const dates = {
+    monthly: 'May 2026 vs April 2026 · Monthly',
+    weekly: 'Jun 9–14 vs Jun 2–8, 2026 · Weekly'
+  };
+  function setView(v) {
+    document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.toggle button').forEach(b => b.classList.remove('active'));
+    document.getElementById('view-' + v).classList.add('active');
+    event.target.classList.add('active');
+    document.getElementById('subtitle').textContent = dates[v];
+  }
+  document.getElementById('subtitle').textContent = dates['monthly'];
+</script>
+</body>
+</html>
